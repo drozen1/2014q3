@@ -10,7 +10,7 @@ public class Prog {
         Birth b2= new Birth(9,2,2004);
         Birth b4= new Birth(9,4,2001);
         Birth b5= new Birth(9,5,1999);
-        Birth b6= new Birth(9,6,2003);
+        Birth b6= new Birth(9,12,2003);
         Student s1= new Student("yossi1",b1);
         Student s11= new Student("yossi11",b1);
         Student s2= new Student("yossi2",b2);
@@ -27,13 +27,26 @@ public class Prog {
         school.addStudent(s5,4);
         school.addStudent(s6,5);
 
+
+        Node<Student>[] check= q3(school);
+        school.addStudent(s6,5);
     }
 
 
     public static Node<Student>[] q3(School school){
         Node<Student>[] return_arr= new Node[12];
-
-
+        for (int i = 0; i <12 ; i++) {
+            return_arr[i]=null;
+        }
+        for (int i = 0; i < 6; i++) {
+            Node<Student> pos= school.getAr()[i];
+            while (pos!=null){
+                int month_index =pos.getValue().getBirthDay().getMonth()-1;
+                Node<Student> add= new Node<Student>(pos.getValue(),return_arr[month_index]);
+                return_arr[month_index]=add;
+                pos=pos.getNext();
+            }
+        }
         return return_arr;
     }
 
